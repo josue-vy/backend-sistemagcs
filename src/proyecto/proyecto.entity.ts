@@ -9,7 +9,7 @@ export class Proyecto {
   codigoProyecto: string;
 
   @Column()
-  nombre: string;
+  nombreProyecto: string;
 
   @Column()
   fechaInicio: string;

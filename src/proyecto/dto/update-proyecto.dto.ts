@@ -1,6 +1,6 @@
 export class UpdateProyectoDto {
   codigoProyecto: string;
-  nombre: string;
+  nombreProyecto: string;
   fechaInicio: string;
   fechaFinal: string;
   estado: string;

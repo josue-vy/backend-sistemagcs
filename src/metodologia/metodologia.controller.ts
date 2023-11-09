@@ -12,7 +12,7 @@ import { MetodologiaService } from './metodologia.service';
 import { Metodologia } from './metodologia.entity';
 import { MetodologiaDto } from './dto/create-metodologia.dto';
 
-@Controller('fase')
+@Controller('metodologia')
 export class MetodologiaController {
   constructor(private elementoService: MetodologiaService) {}
 

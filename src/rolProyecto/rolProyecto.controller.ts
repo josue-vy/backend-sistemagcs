@@ -12,7 +12,7 @@ import { RolProyectoService } from './rolProyecto.service';
 import { RolProyecto } from './rolProyecto.entity';
 import { RolProyectoDto } from './dto/create-rolProyecto.dto';
 
-@Controller('proyecto')
+@Controller('proyectorol')
 export class RolProyectoController {
   constructor(private proyectoService: RolProyectoService) {}
 
