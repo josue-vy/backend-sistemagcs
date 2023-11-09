@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { TipoUsuarios } from 'src/tipoUsuarios/tipousuarios.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity({ name: 'usuarios' })
 export class Usuarios {
@@ -19,4 +26,8 @@ export class Usuarios {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   fechaCreacion: Date;
+
+  @OneToOne(() => TipoUsuarios)
+  @JoinColumn({ name: 'tipoUsuarioId' })
+  name: TipoUsuarios;
 }

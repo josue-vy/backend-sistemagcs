@@ -2,23 +2,34 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuarios } from './usuario.entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login.user.dto';
+import { TipoUsuarios } from 'src/tipoUsuarios/tipousuarios.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(Usuarios) private userRepository: Repository<Usuarios>,
+    @InjectRepository(TipoUsuarios)
+    private userTipoRepository: Repository<TipoUsuarios>,
   ) {}
 
-  createUser(user: CreateUserDto) {
-    const newUser = this.userRepository.create(user);
-    return this.userRepository.save(newUser);
+  async createUser(body: any) {
+    const user = new Usuarios();
+    user.nombre = body.nombre;
+    user.apellido = body.apellido;
+    user.correo = body.correo;
+    user.contrasena = body.contrasena;
+    const newUser = await this.userRepository.save(user);
+
+    const userTipo = new TipoUsuarios();
+    userTipo.nombreTipoUsuario = body.nombreTipoUsuario;
+    userTipo.usuario = newUser;
+    return this.userTipoRepository.save(userTipo);
   }
 
   getUsers() {
-    return this.userRepository.find();
+    return this.userRepository.find({});
   }
 
   deleteUser(id: number) {

@@ -6,6 +6,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { UsersModule } from './usuarios/usuario.module';
 import { TipoUsersModule } from './tipoUsuarios/tipousuarios.module';
+import { ProyectoModule } from './proyecto/proyecto.module';
+import { ElementoConfiModule } from './elementoConfiguracion/elementoConfiguracion.module';
+import { FaseModule } from './fase/fase.module';
+import { MetodologiaModule } from './metodologia/metodologia.module';
+import { MiembroElemModule } from './miembroElemento/miembroElemento.module';
+import { MiembroProModule } from './miembroProyecto/miembroProyecto.module';
+import { RolProyectoModule } from './rolProyecto/rolProyecto.module';
 
 @Module({
   imports: [
@@ -26,6 +33,13 @@ import { TipoUsersModule } from './tipoUsuarios/tipousuarios.module';
     }),
     UsersModule,
     TipoUsersModule,
+    ProyectoModule,
+    ElementoConfiModule,
+    FaseModule,
+    MetodologiaModule,
+    MiembroElemModule,
+    MiembroProModule,
+    RolProyectoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
