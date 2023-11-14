@@ -12,17 +12,18 @@ import { UsersService } from './usuario.service';
 import { Usuarios } from './usuario.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login.user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('usuarios')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  getUsers(): Promise<Usuarios[]> {
+  getUsers() {
     return this.usersService.getUsers();
   }
   @Post()
-  createUser(@Body() body: any) {
+  createUser(@Body() body: CreateUserDto) {
     return this.usersService.createUser(body);
   }
 

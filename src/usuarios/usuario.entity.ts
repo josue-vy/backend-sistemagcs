@@ -28,6 +28,6 @@ export class Usuarios {
   fechaCreacion: Date;
 
   @OneToOne(() => TipoUsuarios)
-  @JoinColumn({ name: 'tipoUsuarioId' })
-  name: TipoUsuarios;
+  @JoinColumn({ referencedColumnName: 'id', name: 'tipoUsuarioId' })
+  tipoUsuario: TipoUsuarios;
 }

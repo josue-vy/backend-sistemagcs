@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login.user.dto';
 import { TipoUsuarios } from 'src/tipoUsuarios/tipousuarios.entity';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -14,22 +15,24 @@ export class UsersService {
     private userTipoRepository: Repository<TipoUsuarios>,
   ) {}
 
-  async createUser(body: any) {
+  async createUser(body: CreateUserDto) {
     const user = new Usuarios();
     user.nombre = body.nombre;
     user.apellido = body.apellido;
     user.correo = body.correo;
     user.contrasena = body.contrasena;
+
     const newUser = await this.userRepository.save(user);
 
     const userTipo = new TipoUsuarios();
-    userTipo.nombreTipoUsuario = body.nombreTipoUsuario;
+    userTipo.nombreTipoUsuario = body.tipoUsuario; // Asegúrate de que la propiedad sea la correcta
     userTipo.usuario = newUser;
+
     return this.userTipoRepository.save(userTipo);
   }
 
-  getUsers() {
-    return this.userRepository.find({});
+  async getUsers() {
+    return this.userRepository.find({ relations: ['tipoUsuario'] });
   }
 
   deleteUser(id: number) {

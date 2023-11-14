@@ -13,6 +13,8 @@ import { MetodologiaModule } from './metodologia/metodologia.module';
 import { MiembroElemModule } from './miembroElemento/miembroElemento.module';
 import { MiembroProModule } from './miembroProyecto/miembroProyecto.module';
 import { RolProyectoModule } from './rolProyecto/rolProyecto.module';
+import { SolicitudCambioModule } from './solicitudCambios/solicitudCambios.module';
+import { MyMulterModule } from './multer.module';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { RolProyectoModule } from './rolProyecto/rolProyecto.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         entities: [join(process.cwd(), 'dist/**/*.entity.js')],
-        synchronize: true,
+        synchronize: false,
       }),
       inject: [ConfigService],
     }),
@@ -40,6 +42,8 @@ import { RolProyectoModule } from './rolProyecto/rolProyecto.module';
     MiembroElemModule,
     MiembroProModule,
     RolProyectoModule,
+    SolicitudCambioModule,
+    MyMulterModule,
   ],
   controllers: [AppController],
   providers: [AppService],

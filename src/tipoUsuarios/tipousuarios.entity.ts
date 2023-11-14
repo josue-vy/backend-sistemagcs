@@ -9,6 +9,6 @@ export class TipoUsuarios {
   @Column()
   nombreTipoUsuario: string;
 
-  @OneToOne(() => Usuarios, (usuario) => usuario.name)
+  @OneToOne(() => Usuarios, (usuario) => usuario.tipoUsuario)
   usuario: Usuarios;
 }

@@ -5,15 +5,18 @@ export class SolicitudCambio {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  fecha: string;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  fecha: Date;
 
   @Column()
   objetivo: string;
 
   @Column()
-  descripcion: string;
+  urlCompartido: string;
 
   @Column()
-  respuesta: string;
+  url: string;
+
+  @Column()
+  descripcion: string;
 }
