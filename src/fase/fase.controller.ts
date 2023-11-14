@@ -9,24 +9,23 @@ import {
   //   Patch,
 } from '@nestjs/common';
 import { FaseService } from './fase.service';
-import { Fase } from './fase.entity';
-import { FaseDto } from './dto/create-fase.dto';
+import { CreateFaseDto } from './dto/create-fase.dto';
 
 @Controller('fase')
 export class FaseController {
-  constructor(private elementoService: FaseService) {}
+  constructor(private faseService: FaseService) {}
 
   @Get()
-  getProyecto(): Promise<Fase[]> {
-    return this.elementoService.getProyecto();
+  getFase() {
+    return this.faseService.getFase();
   }
   @Post()
-  createProyecto(@Body() newUser: FaseDto): Promise<Fase> {
-    return this.elementoService.createProyecto(newUser);
+  createFase(@Body() body: CreateFaseDto) {
+    return this.faseService.createFase(body);
   }
   @Delete(':id')
   deleteProyecto(@Param('id', ParseIntPipe) id: number) {
-    return this.elementoService.deleteProyecto(id);
+    return this.faseService.deleteFase(id);
   }
   //   @Patch(':id')
   //   updateProyecto(

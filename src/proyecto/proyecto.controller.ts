@@ -9,8 +9,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { ProyectoService } from './proyecto.service';
-import { Proyecto } from './proyecto.entity';
-import { ProyectoDto } from './dto/create-proyecto.dto';
+import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 
 @Controller('proyecto')
@@ -18,12 +17,12 @@ export class ProyectoController {
   constructor(private proyectoService: ProyectoService) {}
 
   @Get()
-  getProyecto(): Promise<Proyecto[]> {
+  getProyecto() {
     return this.proyectoService.getProyecto();
   }
   @Post()
-  createProyecto(@Body() newUser: ProyectoDto): Promise<Proyecto> {
-    return this.proyectoService.createProyecto(newUser);
+  createProyecto(@Body() body: CreateProyectoDto) {
+    return this.proyectoService.createProyecto(body);
   }
   @Delete(':id')
   deleteProyecto(@Param('id', ParseIntPipe) id: number) {

@@ -1,3 +1,4 @@
-export class FaseDto {
+export class CreateFaseDto {
   nombreFase: string;
+  metodologia: string;
 }

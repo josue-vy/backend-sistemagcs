@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Metodologia } from 'src/metodologia/metodologia.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity({ name: 'proyecto' })
 export class Proyecto {
@@ -19,4 +26,8 @@ export class Proyecto {
 
   @Column()
   estado: string;
+
+  @OneToOne(() => Metodologia)
+  @JoinColumn({ referencedColumnName: 'id', name: 'metodologiaId' })
+  metodologia: Metodologia;
 }

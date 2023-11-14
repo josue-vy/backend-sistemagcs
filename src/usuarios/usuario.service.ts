@@ -57,18 +57,4 @@ export class UsersService {
 
     return usuario;
   }
-  // async createTipoUser(id: number, tipoUsuarios: CreateTipoUserDto) {
-  //   const userFond = await this.userTipoRepository.findOne({
-  //     where: {
-  //       id,
-  //     },
-  //   });
-  //   if (!userFond) {
-  //     return new HttpException('User not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   const newProfile = this.userTipoRepository.create(tipoUsuarios);
-  //   const savedProfile = await this.userTipoRepository.save(newProfile);
-  //   userFond.nombreTipoUsario = savedProfile;
-
-  //   return this.userRepository.save(userFond);
 }
