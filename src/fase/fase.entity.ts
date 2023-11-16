@@ -1,3 +1,4 @@
+import { ElementoConfiguracion } from 'src/elementoConfiguracion/elementoConfiguracion.entity';
 import { Metodologia } from 'src/metodologia/metodologia.entity';
 import {
   Entity,
@@ -18,4 +19,10 @@ export class Fase {
   @OneToOne(() => Metodologia)
   @JoinColumn({ referencedColumnName: 'id', name: 'metodologiaId' })
   metodologia: Metodologia;
+
+  @OneToOne(
+    () => ElementoConfiguracion,
+    (elementoConfiguracion) => elementoConfiguracion.fase,
+  )
+  elementoConfiguracion: ElementoConfiguracion;
 }

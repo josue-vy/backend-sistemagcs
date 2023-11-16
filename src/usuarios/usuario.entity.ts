@@ -1,3 +1,4 @@
+import { MiembroProyecto } from 'src/miembroProyecto/miembroProyecto.entity';
 import { TipoUsuarios } from 'src/tipoUsuarios/tipousuarios.entity';
 import {
   Entity,
@@ -18,7 +19,7 @@ export class Usuarios {
   @Column()
   apellido: string;
 
-  @Column({ unique: true })
+  @Column()
   correo: string;
 
   @Column()
@@ -30,4 +31,7 @@ export class Usuarios {
   @OneToOne(() => TipoUsuarios)
   @JoinColumn({ referencedColumnName: 'id', name: 'tipoUsuarioId' })
   tipoUsuario: TipoUsuarios;
+
+  @OneToOne(() => MiembroProyecto, (miembroProyecto) => miembroProyecto.usuario)
+  miembroProyectoUsuario: MiembroProyecto;
 }

@@ -9,24 +9,36 @@ import {
   //   Patch,
 } from '@nestjs/common';
 import { MiembroProService } from './miembroProyecto.service';
-import { MiembroProyecto } from './miembroProyecto.entity';
 import { MiembroProDto } from './dto/create-miembroProyecto.dto';
 
-@Controller('miembroelem')
+@Controller('miembropro')
 export class MiembroProController {
-  constructor(private elementoService: MiembroProService) {}
+  constructor(private miembroProService: MiembroProService) {}
 
   @Get()
-  getProyecto(): Promise<MiembroProyecto[]> {
-    return this.elementoService.getProyecto();
+  getMiembroPro() {
+    return this.miembroProService.getMiembroPro();
   }
+
   @Post()
-  createProyecto(@Body() newUser: MiembroProDto): Promise<MiembroProyecto> {
-    return this.elementoService.createProyecto(newUser);
+  async createMiembroPro(@Body() body: MiembroProDto) {
+    const createdMiembroPro =
+      await this.miembroProService.createMiembroPro(body);
+
+    // Construir un objeto de respuesta con detalles del miembro creado
+    const response = {
+      id: createdMiembroPro.id,
+      nombre: body.nombre,
+      rol: body.rol,
+      proyecto: body.proyecto,
+      // Puedes agregar más propiedades si es necesario
+    };
+
+    return response;
   }
   @Delete(':id')
   deleteProyecto(@Param('id', ParseIntPipe) id: number) {
-    return this.elementoService.deleteProyecto(id);
+    return this.miembroProService.deleteProyecto(id);
   }
   //   @Patch(':id')
   //   updateProyecto(

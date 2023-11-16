@@ -1,5 +1,5 @@
 export class ElementoConfiDto {
-  codigoElemento: string;
+  nomenclaturaElemento: string;
   nombreElemento: string;
-  nomenclatura: string;
+  fase: string;
 }

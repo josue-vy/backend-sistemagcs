@@ -1,4 +1,5 @@
 import { Metodologia } from 'src/metodologia/metodologia.entity';
+import { MiembroProyecto } from 'src/miembroProyecto/miembroProyecto.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -30,4 +31,10 @@ export class Proyecto {
   @OneToOne(() => Metodologia)
   @JoinColumn({ referencedColumnName: 'id', name: 'metodologiaId' })
   metodologia: Metodologia;
+
+  @OneToOne(
+    () => MiembroProyecto,
+    (miembroProyecto) => miembroProyecto.proyecto,
+  )
+  miembroProyectoProyecto: MiembroProyecto;
 }

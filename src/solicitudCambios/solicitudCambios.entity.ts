@@ -14,7 +14,7 @@ export class SolicitudCambio {
   @Column()
   urlCompartido: string;
 
-  @Column()
+  @Column({ nullable: true })
   url: string;
 
   @Column()

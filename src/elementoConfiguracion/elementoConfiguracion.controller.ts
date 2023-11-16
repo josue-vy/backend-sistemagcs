@@ -9,7 +9,6 @@ import {
   //   Patch,
 } from '@nestjs/common';
 import { ElementoService } from './elementoConfiguracion.service';
-import { ElementoConfiguracion } from './elementoConfiguracion.entity';
 import { ElementoConfiDto } from './dto/create-elementoConfiguracion.dto';
 
 @Controller('elementoc')
@@ -17,14 +16,12 @@ export class ElementoController {
   constructor(private elementoService: ElementoService) {}
 
   @Get()
-  getProyecto(): Promise<ElementoConfiguracion[]> {
-    return this.elementoService.getProyecto();
+  getElemento() {
+    return this.elementoService.getElemento();
   }
   @Post()
-  createProyecto(
-    @Body() newUser: ElementoConfiDto,
-  ): Promise<ElementoConfiguracion> {
-    return this.elementoService.createProyecto(newUser);
+  createElemento(@Body() body: ElementoConfiDto) {
+    return this.elementoService.createElemento(body);
   }
   @Delete(':id')
   deleteProyecto(@Param('id', ParseIntPipe) id: number) {

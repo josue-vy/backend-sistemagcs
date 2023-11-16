@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Fase } from 'src/fase/fase.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity({ name: 'elementoConfiguracion' })
 export class ElementoConfiguracion {
@@ -6,11 +13,12 @@ export class ElementoConfiguracion {
   id: number;
 
   @Column()
-  codigoElemento: string;
+  nomenclaturaElemento: string;
 
   @Column()
   nombreElemento: string;
 
-  @Column()
-  nomenclatura: string;
+  @OneToOne(() => Fase)
+  @JoinColumn({ referencedColumnName: 'id', name: 'faseId' })
+  fase: Fase;
 }
