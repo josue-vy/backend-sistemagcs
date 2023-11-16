@@ -1,0 +1,133 @@
+@startuml
+
+package "backend" {
+    package "src" {
+        package "elementoConfiguracion" {
+            file "elementoConfiguracion.controller.ts"
+            file "elementoConfiguracion.entity.ts"
+            file "elementoConfiguracion.module.ts"
+            file "elementoConfiguracion.service.ts"
+            package "dto" {
+                file "create-elementoConfiguracion.dto.ts"
+            }
+        }
+
+        package "fase" {
+            file "fase.controller.ts"
+            file "fase.entity.ts"
+            file "fase.module.ts"
+            file "fase.service.ts"
+            package "dto2" {
+                file "create-fase.dto.ts"
+            }
+        }
+
+        package "metodologia" {
+            file "metodologia.controller.ts"
+            file "metodologia.entity.ts"
+            file "metodologia.module.ts"
+            file "metodologia.service.ts"
+            package "dto3" {
+                file "create-metodologia.dto.ts"
+            }
+        }
+
+        package "miembroElemento" {
+            file "miembroElemento.controller.ts"
+            file "miembroElemento.entity.ts"
+            file "miembroElemento.module.ts"
+            file "miembroElemento.service.ts"
+            package "dto4" {
+                file "create-miembroElemento.dto.ts"
+            }
+        }
+
+        package "miembroProyecto" {
+            file "miembroProyecto.controller.ts"
+            file "miembroProyecto.entity.ts"
+            file "miembroProyecto.module.ts"
+            file "miembroProyecto.service.ts"
+            package "dto5" {
+                file "create-miembroProyecto.dto.ts"
+            }
+        }
+
+        package "proyecto" {
+            file "proyecto.controller.ts"
+            file "proyecto.entity.ts"
+            file "proyecto.module.ts"
+            file "proyecto.service.ts"
+            package "dto6" {
+                file "create-proyecto.dto.ts"
+            }
+        }
+
+        package "rolProyecto" {
+            file "rolProyecto.controller.ts"
+            file "rolProyecto.entity.ts"
+            file "rolProyecto.module.ts"
+            file "rolProyecto.service.ts"
+            package "dto7" {
+                file "create-rolProyecto.dto.ts"
+            }
+        }
+
+        package "rolProyecto" {
+            file "rolProyecto.controller.ts"
+            file "rolProyecto.entity.ts"
+            file "rolProyecto.module.ts"
+            file "rolProyecto.service.ts"
+            package "dto8" {
+                file "create-rolProyecto.dto.ts"
+            }
+        }
+
+        package "solicitud" {
+            file "solicitud.controller.ts"
+            file "solicitud.entity.ts"
+            file "solicitud.module.ts"
+            file "solicitud.service.ts"
+            package "dto9" {
+                file "create-solicitud.dto.ts"
+            }
+        }
+
+        package "solicitudCambios" {
+            file "solicitudCambios.controller.ts"
+            file "solicitudCambios.entity.ts"
+            file "solicitudCambios.module.ts"
+            file "solicitudCambios.service.ts"
+            package "dto10" {
+                file "create-solicitudCambios.dto.ts"
+            }
+        }
+
+        package "tipoUsuarios" {
+            file "tipoUsuarios.controller.ts"
+            file "tipoUsuarios.entity.ts"
+            file "tipoUsuarios.module.ts"
+            file "tipoUsuarios.service.ts"
+            package "dto11" {
+                file "create-tipoUsuarios.dto.ts"
+            }
+        }
+
+        package "usuarios" {
+            file "usuarios.controller.ts"
+            file "usuarios.entity.ts"
+            file "usuarios.module.ts"
+            file "usuarios.service.ts"
+            package "dto12" {
+                file "create-usuarios.dto.ts"
+            }
+        }
+    }
+    package "node_modules" {
+    }
+    package "uploads" {
+    }
+    package "test" {
+    }
+}
+
+@enduml
