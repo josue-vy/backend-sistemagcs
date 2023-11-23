@@ -20,31 +20,40 @@ export class MiembroProService {
   ) {}
 
   async createMiembroPro(body: MiembroProDto) {
-    // Crear instancias de entidades
-    const miembroPro = new MiembroProyecto();
-    const usuario = new Usuarios();
-    const rolProyecto = new RolProyecto();
-    const proyecto = new Proyecto();
+    const { usuarios, rol, proyecto } = body;
 
-    // Establecer relaciones
-    usuario.nombre = body.nombre;
-    usuario.miembroProyectoUsuario = miembroPro;
+    const miembrosProyecto: MiembroProyecto[] = [];
 
-    rolProyecto.nombreRolProyecto = body.rol;
-    rolProyecto.miembroProyectoRol = miembroPro;
+    for (const usuarioNombre of usuarios) {
+      const miembroPro = new MiembroProyecto();
 
-    proyecto.nombreProyecto = body.proyecto;
-    proyecto.miembroProyectoProyecto = miembroPro;
+      const usuario = await this.usuarioRepository.findOne({
+        where: { nombre: usuarioNombre },
+      });
 
-    // Guardar las entidades en una transacción para mantener la integridad
-    const createdMiembro = await this.miembroProRepository.save(miembroPro);
-    await Promise.all([
-      this.usuarioRepository.save(usuario),
-      this.rolProyectoRepository.save(rolProyecto),
-      this.proyectoRepository.save(proyecto),
-    ]);
+      const rolProyecto = await this.rolProyectoRepository.findOne({
+        where: { nombreRolProyecto: rol },
+      });
 
-    return createdMiembro;
+      const proyectoEntity = await this.proyectoRepository.findOne({
+        where: { nombreProyecto: proyecto },
+      });
+
+      if (!usuario || !rolProyecto || !proyectoEntity) {
+        throw new Error('No se encontraron todas las relaciones necesarias.');
+      }
+
+      miembroPro.usuario = usuario;
+      miembroPro.rol = rolProyecto;
+      miembroPro.proyecto = proyectoEntity;
+
+      miembrosProyecto.push(miembroPro);
+    }
+
+    const createdMiembros =
+      await this.miembroProRepository.save(miembrosProyecto);
+
+    return createdMiembros;
   }
 
   async getMiembroPro() {
@@ -56,8 +65,20 @@ export class MiembroProService {
   deleteProyecto(id: number) {
     return this.miembroProRepository.delete({ id });
   }
-
-  // updateProyecto(id: number, user: MiembroProDto) {
-  //   return this.miembroProRepository.update({ id }, user);
-  // }
+  async getMiembroProDataWithRelatedEntities() {
+    return this.miembroProRepository
+      .createQueryBuilder('miembroProyecto')
+      .leftJoinAndSelect('miembroProyecto.usuario', 'usuario')
+      .leftJoinAndSelect('miembroProyecto.rol', 'rol')
+      .leftJoinAndSelect('miembroProyecto.proyecto', 'proyecto')
+      .getMany()
+      .then((miembrosProyecto) => {
+        return miembrosProyecto.map((miembroPro) => ({
+          nombreUsuario: miembroPro.usuario?.nombre || 'Usuario no encontrado',
+          nombreRol: miembroPro.rol?.nombreRolProyecto || 'Rol no encontrado',
+          nombreProyecto:
+            miembroPro.proyecto?.nombreProyecto || 'Proyecto no encontrado',
+        }));
+      });
+  }
 }

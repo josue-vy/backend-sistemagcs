@@ -19,33 +19,29 @@ export class MiembroProController {
   getMiembroPro() {
     return this.miembroProService.getMiembroPro();
   }
+  @Get('data')
+  async getMiembroProDataWithRelatedEntities() {
+    const miembrosProyecto =
+      await this.miembroProService.getMiembroProDataWithRelatedEntities();
+    return miembrosProyecto;
+  }
 
   @Post()
   async createMiembroPro(@Body() body: MiembroProDto) {
-    const createdMiembroPro =
-      await this.miembroProService.createMiembroPro(body);
-
-    // Construir un objeto de respuesta con detalles del miembro creado
-    const response = {
-      id: createdMiembroPro.id,
-      nombre: body.nombre,
-      rol: body.rol,
-      proyecto: body.proyecto,
-      // Puedes agregar más propiedades si es necesario
-    };
-
-    return response;
+    try {
+      const createdMiembros =
+        await this.miembroProService.createMiembroPro(body);
+      return {
+        createdMiembros,
+        message: 'Miembros del proyecto creados correctamente.',
+      };
+    } catch (error) {
+      return { error: 'Error al crear miembros del proyecto.' };
+    }
   }
+
   @Delete(':id')
   deleteProyecto(@Param('id', ParseIntPipe) id: number) {
     return this.miembroProService.deleteProyecto(id);
   }
-  //   @Patch(':id')
-  //   updateProyecto(
-  //     @Param('id', ParseIntPipe) id: number,
-  //     @Body()
-  //     user: UpdateProyectoDto,
-  //   ) {
-  //     return this.elementoService.updateProyecto(id, user);
-  //   }
 }

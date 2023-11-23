@@ -1,22 +1,19 @@
 import { Proyecto } from 'src/proyecto/proyecto.entity';
 import { RolProyecto } from 'src/rolProyecto/rolProyecto.entity';
 import { Usuarios } from 'src/usuarios/usuario.entity';
-import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'miembroProyecto' })
 export class MiembroProyecto {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Usuarios)
-  @JoinColumn({ referencedColumnName: 'id', name: 'usuarioId' })
+  @ManyToOne(() => Usuarios, (usuario) => usuario.miembrosProyecto)
   usuario: Usuarios;
 
-  @OneToOne(() => RolProyecto)
-  @JoinColumn({ referencedColumnName: 'id', name: 'rolProyectoId' })
+  @ManyToOne(() => RolProyecto, (rolProyecto) => rolProyecto.miembrosProyecto)
   rol: RolProyecto;
 
-  @OneToOne(() => Proyecto)
-  @JoinColumn({ referencedColumnName: 'id', name: 'proyectoId' })
+  @ManyToOne(() => Proyecto, (proyecto) => proyecto.miembrosProyecto)
   proyecto: Proyecto;
 }

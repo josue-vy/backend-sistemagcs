@@ -6,6 +6,7 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'proyecto' })
@@ -32,9 +33,9 @@ export class Proyecto {
   @JoinColumn({ referencedColumnName: 'id', name: 'metodologiaId' })
   metodologia: Metodologia;
 
-  @OneToOne(
+  @OneToMany(
     () => MiembroProyecto,
     (miembroProyecto) => miembroProyecto.proyecto,
   )
-  miembroProyectoProyecto: MiembroProyecto;
+  miembrosProyecto: MiembroProyecto[];
 }
