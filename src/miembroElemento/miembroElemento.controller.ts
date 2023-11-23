@@ -3,37 +3,41 @@ import {
   Post,
   Body,
   Get,
-  Delete,
-  Param,
-  ParseIntPipe,
+
   //   Patch,
 } from '@nestjs/common';
 import { MiembroElemService } from './miembroElemento.service';
-import { MiembroElemento } from './miembroElemento.entity';
+
 import { MiembroEleDto } from './dto/create-miembroElemento.dto';
 
 @Controller('miembroelem')
 export class MiembroElemController {
-  constructor(private elementoService: MiembroElemService) {}
-
+  constructor(private miembroElementoService: MiembroElemService) {}
   @Get()
-  getProyecto(): Promise<MiembroElemento[]> {
-    return this.elementoService.getProyecto();
+  async getPMiembroElemento() {
+    try {
+      const miembrosElemento =
+        await this.miembroElementoService.getPMiembroElemento();
+
+      // Enviar la respuesta al cliente (puedes usar res.json() si usas Express)
+      return { data: miembrosElemento }; // Envía los datos obtenidos como respuesta
+    } catch (error) {
+      // Manejar errores
+      return { error: 'Hubo un error al obtener los datos.' };
+    }
   }
+
   @Post()
-  createProyecto(@Body() newUser: MiembroEleDto): Promise<MiembroElemento> {
-    return this.elementoService.createProyecto(newUser);
+  async createMiembroElemento(@Body() miembroEleDto: MiembroEleDto) {
+    try {
+      const createdMiembroElemento =
+        await this.miembroElementoService.createMiembroElemento(miembroEleDto);
+      return {
+        createdMiembroElemento,
+        message: 'Miembro del elemento creado correctamente.',
+      };
+    } catch (error) {
+      return { error: 'Error al crear el miembro del elemento.' };
+    }
   }
-  @Delete(':id')
-  deleteProyecto(@Param('id', ParseIntPipe) id: number) {
-    return this.elementoService.deleteProyecto(id);
-  }
-  //   @Patch(':id')
-  //   updateProyecto(
-  //     @Param('id', ParseIntPipe) id: number,
-  //     @Body()
-  //     user: UpdateProyectoDto,
-  //   ) {
-  //     return this.elementoService.updateProyecto(id, user);
-  //   }
 }

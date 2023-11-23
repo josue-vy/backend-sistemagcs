@@ -1,3 +1,4 @@
+import { MiembroElemento } from 'src/miembroElemento/miembroElemento.entity';
 import { Proyecto } from 'src/proyecto/proyecto.entity';
 import { RolProyecto } from 'src/rolProyecto/rolProyecto.entity';
 import { Usuarios } from 'src/usuarios/usuario.entity';
@@ -16,4 +17,10 @@ export class MiembroProyecto {
 
   @ManyToOne(() => Proyecto, (proyecto) => proyecto.miembrosProyecto)
   proyecto: Proyecto;
+
+  @ManyToOne(
+    () => MiembroElemento,
+    (miembroElemento) => miembroElemento.miembroProyecto,
+  )
+  elementos: MiembroElemento[];
 }

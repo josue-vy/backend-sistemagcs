@@ -1,5 +1,5 @@
 export class MiembroProDto {
-  usuarios: string[]; // Ahora permite asignar varios usuarios
+  usuarios: string[];
   rol: string;
   proyecto: string;
 }
