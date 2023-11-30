@@ -1,8 +1,8 @@
 export class MiembroEleDto {
-  usuarios: string[]; // Cambio a un array de usuarios
+  usuarios: string[];
   rol: string;
   proyecto: string;
-  elementoConfiguracion: string;
+  elementosConfiguracion: string[];
   url: string;
   fechaInicio: string;
   fechaFin: string;

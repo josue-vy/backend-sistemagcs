@@ -15,9 +15,6 @@ export class Proyecto {
   id: number;
 
   @Column()
-  codigoProyecto: string;
-
-  @Column()
   nombreProyecto: string;
 
   @Column()

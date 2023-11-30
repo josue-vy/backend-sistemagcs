@@ -17,7 +17,6 @@ export class ProyectoService {
 
   async createProyecto(body: CreateProyectoDto) {
     const proyecto = new Proyecto();
-    proyecto.codigoProyecto = body.codigoProyecto;
     proyecto.nombreProyecto = body.nombreProyecto;
     proyecto.fechaInicio = body.fechaInicio;
     proyecto.fechaFinal = body.fechaFinal;

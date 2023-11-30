@@ -6,6 +6,8 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity({ name: 'elementoConfiguracion' })
@@ -23,9 +25,10 @@ export class ElementoConfiguracion {
   @JoinColumn({ referencedColumnName: 'id', name: 'faseId' })
   fase: Fase;
 
-  @OneToOne(
+  @ManyToMany(
     () => MiembroElemento,
-    (miembroElemento) => miembroElemento.elementoConfiguracion,
+    (miembroElemento) => miembroElemento.elementos,
   )
-  miembroElemento: Fase;
+  @JoinTable()
+  elementos: MiembroElemento[];
 }

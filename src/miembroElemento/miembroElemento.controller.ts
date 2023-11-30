@@ -18,12 +18,12 @@ export class MiembroElemController {
     try {
       const miembrosElemento =
         await this.miembroElementoService.getPMiembroElemento();
-
-      // Enviar la respuesta al cliente (puedes usar res.json() si usas Express)
-      return { data: miembrosElemento }; // Envía los datos obtenidos como respuesta
+      return { data: miembrosElemento };
     } catch (error) {
-      // Manejar errores
-      return { error: 'Hubo un error al obtener los datos.' };
+      console.error('Error al obtener los datos:', error); // Imprimir el mensaje completo del error en la consola
+      return {
+        error: 'Hubo un error al obtener los datos. Detalles en el servidor.',
+      };
     }
   }
 

@@ -18,17 +18,18 @@ export class MiembroElemService {
   ) {}
 
   async createMiembroElemento(user: MiembroEleDto) {
-    const { usuarios, elementoConfiguracion, url, fechaInicio, fechaFin } =
+    const { usuarios, elementosConfiguracion, url, fechaInicio, fechaFin } =
       user;
 
-    // Buscar ElementoConfiguracion por nombre o ID (nomenclaturaElemento es el campo correcto)
-    const elementoConf = await this.elementoConfiguracionRepository.findOne({
-      where: { nomenclaturaElemento: elementoConfiguracion },
+    // Obtener los ElementoConfiguracion por nombres o IDs
+    const elementosConf = await this.elementoConfiguracionRepository.find({
+      where: elementosConfiguracion.map((nombre) => ({
+        nomenclaturaElemento: nombre,
+      })),
     });
 
-    // Buscar MiembroProyecto por usuarios (si es una lista de usuarios, debes decidir cómo manejarlo)
     const miembroProyecto = await this.miembroProyectoRepository.findOne({
-      where: { usuario: { nombre: usuarios[0] } }, // Modifica esto dependiendo de cómo se relacionen los usuarios y el MiembroProyecto
+      where: { usuario: { nombre: usuarios[0] } }, // Modificar según la relación entre usuarios y MiembroProyecto
     });
 
     // Crear el nuevo MiembroElemento con las referencias a ElementoConfiguracion y MiembroProyecto
@@ -36,7 +37,7 @@ export class MiembroElemService {
     newMiembroElemento.url = url;
     newMiembroElemento.fechaInicio = fechaInicio;
     newMiembroElemento.fechaFin = fechaFin;
-    newMiembroElemento.elementoConfiguracion = elementoConf;
+    newMiembroElemento.elementos = elementosConf;
     newMiembroElemento.miembroProyecto = miembroProyecto;
 
     // Guardar el nuevo MiembroElemento en la base de datos
@@ -48,10 +49,7 @@ export class MiembroElemService {
       .createQueryBuilder('miembroElemento')
       .leftJoin('miembroElemento.miembroProyecto', 'miembroProyecto')
       .leftJoin('miembroProyecto.usuario', 'usuario')
-      .leftJoin(
-        'miembroElemento.elementoConfiguracion',
-        'elementoConfiguracion',
-      )
+      .leftJoinAndSelect('miembroElemento.elementos', 'elementos')
       .select([
         'miembroElemento.id AS id',
         'miembroElemento.url AS url',
@@ -59,7 +57,7 @@ export class MiembroElemService {
         'miembroElemento.fechaFin AS fechaFin',
         'usuario.id AS usuarioId',
         'usuario.nombre AS nombreUsuario',
-        'elementoConfiguracion.nomenclaturaElemento AS nomenclaturaElemento',
+        'elementos.nomenclaturaElemento AS nomenclaturaElemento',
       ])
       .getRawMany();
 

@@ -5,8 +5,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToOne,
-  JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 
 @Entity({ name: 'miembroElemento' })
@@ -23,9 +22,11 @@ export class MiembroElemento {
   @Column()
   fechaFin: string;
 
-  @OneToOne(() => ElementoConfiguracion)
-  @JoinColumn({ referencedColumnName: 'id', name: 'elementoConfiguracionId' })
-  elementoConfiguracion: ElementoConfiguracion;
+  @ManyToMany(
+    () => ElementoConfiguracion,
+    (elementoConfiguracion) => elementoConfiguracion.elementos,
+  )
+  elementos: ElementoConfiguracion[];
 
   @ManyToOne(
     () => MiembroProyecto,
