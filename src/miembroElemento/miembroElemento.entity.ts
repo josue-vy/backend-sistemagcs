@@ -16,11 +16,11 @@ export class MiembroElemento {
   @Column()
   url: string;
 
-  @Column()
-  fechaInicio: string;
+  @Column('date')
+  fechaInicio: Date;
 
-  @Column()
-  fechaFin: string;
+  @Column('date')
+  fechaFin: Date;
 
   @ManyToMany(
     () => ElementoConfiguracion,

@@ -4,11 +4,11 @@ import { UsersService } from './usuario.service';
 import { Usuarios } from './usuario.entity';
 import { UsersController } from './usuario.controller';
 import { TipoUsuarios } from 'src/tipoUsuarios/tipousuarios.entity';
-import { MiembroProModule } from 'src/miembroProyecto/miembroProyecto.module';
+import { MiembroProyecto } from 'src/miembroProyecto/miembroProyecto.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Usuarios, TipoUsuarios, MiembroProModule]),
+    TypeOrmModule.forFeature([Usuarios, TipoUsuarios, MiembroProyecto]),
   ],
   controllers: [UsersController],
   providers: [UsersService],

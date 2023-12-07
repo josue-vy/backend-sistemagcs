@@ -4,6 +4,6 @@ export class MiembroEleDto {
   proyecto: string;
   elementosConfiguracion: string[];
   url: string;
-  fechaInicio: string;
-  fechaFin: string;
+  fechaInicio: Date;
+  fechaFin: Date;
 }

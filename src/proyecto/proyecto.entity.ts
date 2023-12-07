@@ -17,11 +17,11 @@ export class Proyecto {
   @Column()
   nombreProyecto: string;
 
-  @Column()
-  fechaInicio: string;
+  @Column('date')
+  fechaInicio: Date;
 
-  @Column()
-  fechaFinal: string;
+  @Column('date')
+  fechaFinal: Date;
 
   @Column()
   estado: string;

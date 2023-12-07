@@ -1,7 +1,7 @@
 export class CreateProyectoDto {
   nombreProyecto: string;
-  fechaInicio: string;
-  fechaFinal: string;
+  fechaInicio: Date;
+  fechaFinal: Date;
   estado: string;
   metodologia: string;
 }
